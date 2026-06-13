@@ -53,8 +53,9 @@ class Project:
         }
     
 class Task:
-    def __init__(self, title, project_title, status='pending'):
+    def __init__(self, title, description, project_title, status='pending'):
         self.__title = title                  # Private
+        self.__description = description      # Private
         self.__project_title = project_title  # Private
         self.status = status                  # Left public so CLI can update it easily!
 
@@ -63,12 +64,17 @@ class Task:
         return self.__title
 
     @property
+    def description(self):
+        return self.__description
+
+    @property
     def project_title(self):
         return self.__project_title
 
     def to_dict(self):
         return {
             'title': self.__title,
+            'description': self.__description,
             'project_title': self.__project_title,
             'status': self.status
         }
