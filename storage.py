@@ -11,8 +11,8 @@ def read_json(filepath):
             #using json.load() instead of file.read() to make the data into python objects
             content = json.load(file)
             return content
-    except FileNotFoundError:
-        # returns an empty list if the file doesn't exist yet
+    except (FileNotFoundError, json.JSONDecodeError):
+        # returns an empty list if the file doesn't exist yet or is empty
         return []
 
 def write_json(filepath, data):

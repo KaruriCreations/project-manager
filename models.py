@@ -78,3 +78,6 @@ class Task:
             'project_title': self.__project_title,
             'status': self.status
         }
+    
+    def complete_a_task(self):
+        self.status = 'completed'
