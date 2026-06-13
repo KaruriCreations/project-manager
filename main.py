@@ -43,6 +43,19 @@ def add_task(args):
     
     storage.save_tasks(existing_tasks, TASKS_FILE)
     console.print(f"Task '{args.title}' added successfully!")
+
+def complete_task(args):
+    # 1. Load what is ALREADY saved in the file
+    existing_tasks = storage.load_tasks(TASKS_FILE)
+    
+    # 2. Find the task and mark it as complete
+    for task in existing_tasks:
+        if task.title == args.title:
+            task.complete_a_task()
+    
+    # 3. Save the updated list back to disk
+    storage.save_tasks(existing_tasks, TASKS_FILE)
+    console.print(f"Task '{args.title}' marked as completed!")
 def main():
     parser = argparse.ArgumentParser(description="Project Management CLI")
     subparsers = parser.add_subparsers()
@@ -66,6 +79,10 @@ def main():
     task_parser.add_argument("--description", required=True, help="Description of the task")
     task_parser.add_argument("--project", required=True, help="Title of the project associated with the task")
     task_parser.set_defaults(func=add_task)
+
+    task_complete_parser = subparsers.add_parser("complete_task", help="Mark a task as completed")
+    task_complete_parser.add_argument("--title", required=True, help="Title of the task to mark as completed")
+    task_complete_parser.set_defaults(func=complete_task)
 
     args = parser.parse_args()
     if hasattr(args, "func"):
