@@ -57,7 +57,7 @@ class Task:
         self.__title = title                  # Private
         self.__description = description      # Private
         self.__project_title = project_title  # Private
-        self.status = status                  # Left public so CLI can update it easily!
+        self.status = status                  # Public
 
     @property
     def title(self):

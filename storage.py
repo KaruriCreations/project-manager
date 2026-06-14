@@ -20,7 +20,7 @@ def write_json(filepath, data):
         raise ValueError("Filepath cannot be empty.")
     with open(filepath, "w") as file:
         #using json.dump() to write the data into the file in JSON format
-        json.dump(data, file, indent=4)
+        json.dump(data, file)
 
 
 # --- DATA SAVING LAYER ---
